@@ -1,0 +1,13 @@
+{
+  "name": "MDN",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "http-server ./src -p 7000"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {}
+}
