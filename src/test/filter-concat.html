@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let source = [
+      {a: '赵'}, {b: '钱'}, {c: '孙'}, {a: '李'}, {b: '周'}, {c: '吴'}, {a: '郑'}, {b: '王'}
+    ]
+    // 1. 生成构造对象
+    let mapSource = Object.create(null)   //  类似 let a = {}, 区别是没有 __proto__
+    source.forEach((element) => {
+      for (const key in element) {
+        if (element.hasOwnProperty(key)) {
+          const v = element[key]
+          if (!mapSource[key]) {
+            mapSource[key] = []
+          }
+          mapSource[key].push(v)
+        }
+      }
+    })
+    console.info(mapSource)
+    //  2. 打印结果
+    for (const key in mapSource) {
+      const v = mapSource[key]
+      console.info(key, v.join('-'))
+    }
+  </script>
+</body>
+</html>
