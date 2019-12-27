@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Proxy</title>
+</head>
+<body>
+  <button id="btn">change</button>
+  <script>
+
+    class PlayerProxy {
+
+      constructor() {
+        this.watch('isEnd', 'onChangeValueIsEnd')
+      }
+
+      isEnd = false
+      onChangeValueIsEnd(isEnd) {
+        console.info(`onChangeValueIsEnd: ${isEnd}`)
+      }
+
+      watch(propName, methodName, config = {
+        immediate: false
+      }) {
+        if (!ProxyHandler.proxy.has(propName)) {
+          ProxyHandler.proxy.set(propName, {
+            name: methodName,
+            handler: this[methodName],
+            config
+          })
+        }
+      }
+    }
+    class ProxyHandler {
+      static proxy = new Map()
+      static create(target = Object.create(null)) {
+        return new Proxy(target, {
+          set(target, propName, value) {
+            const old = target[propName]
+            target[propName] = value
+            if (ProxyHandler.proxy.has(propName)) {
+              const watchProxyMap = ProxyHandler.proxy.get(propName)
+              if (!watchProxyMap) return true
+              if (watchProxyMap.config.immediate && old !== value) {
+                Reflect.apply(watchProxyMap.handler, target, [value, old])
+                return true
+              }
+              if (old !== value) {
+                console.info(target)
+                console.info(`now is ${value}, old is ${old}`)
+                target[watchProxyMap.name](value)
+                watchProxyMap.handler(value)
+                watchProxyMap.handler.apply(target, [value])
+                Reflect.apply(watchProxyMap.handler, undefined, [value, old])
+              }
+            }
+            return true
+          }
+        })
+      }
+    }
+
+    const Player = ProxyHandler.create(new PlayerProxy())
+
+    console.info(Player)
+
+    document.getElementById('btn').addEventListener('click', () => {
+      Player.isEnd = !Player.isEnd
+    })
+
+  </script>
+</body>
+</html>

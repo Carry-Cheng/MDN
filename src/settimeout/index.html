@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html, body { margin: 0; padding: 0; }
+    .app { width: 800px; height: auto; margin: 100px auto; }
+    .ul { margin: 0; padding: 0; cursor: pointer; }
+    .li { list-style: none; margin: 5px; float: left; width: 80px; height: 50px; background: coral;
+      position: relative;
+    }
+    .lv1 { text-align: center; line-height: 50px; font-size: 14px; color: white; }
+    .lv2 {display: none; position: absolute; left: 0; top: 50px; background: #999999;}
+    .li:hover .lv2 {display: block;}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <ul class="ul">
+      <li class="li">
+        <div class="lv1">居住建筑</div>
+        <div class="lv2">
+          <h1>This is content.</h1>
+        </div>
+      </li>
+      <li class="li">
+        <div class="lv1">办公建筑</div>
+        <div class="lv2">
+          <h1>This is content.</h1>
+        </div>
+      </li>
+      <li class="li">
+        <div class="lv1">酒店建筑</div>
+        <div class="lv2">
+          <h1>This is content.</h1>
+        </div>
+      </li>
+      <li class="li">
+        <div class="lv1">商业建筑</div>
+        <div class="lv2">
+          <h1>This is content.</h1>
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

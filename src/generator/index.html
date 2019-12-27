@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function* gen(x) {
+      return yield x + 2
+    }
+
+    let g = gen(1)
+    console.info(g.next())
+    console.info(g.next(2))
+
+    const sleep = function(timeout) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve()
+        }, timeout)
+      })
+    }
+
+    async function run() {
+      console.info('sleep start....')
+      await sleep(5000)
+      console.info('sleep end....')
+    }
+
+    run()
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Component</title>
+</head>
+<body>
+  <script>
+    class VDiv extends HTMLElement {
+      constructor() {
+        // Always call super first in constructor
+        super()
+        // Create a shadow root
+        const shadow = this.attachShadow({ mode: 'open' })
+        // Create wrapper
+        const wrapper = document.createElement('div')
+        // Create some css to apply to the shadow dom
+      }
+    }
+    customElements.define('v-div', VDiv)
+  </script>
+</body>
+</html>
